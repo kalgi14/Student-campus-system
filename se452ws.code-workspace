@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "concepts"
+		},
+		{
+			"path": "airline-project"
+		},
+		{
+			"path": "database"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
