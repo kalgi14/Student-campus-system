@@ -1,6 +1,6 @@
-INSERT INTO se452.category (id, name, description) VALUES
-            ('11101', 'Sheena Wyre', 'swyre0@un.org'),
-            ('11100', 'Dilly Caffery', 'dcaffery1@blogspot.com'),
-            ('22200', 'Marysa Alyonov', 'malyonov3@utexas.edu'),
-            ('22201', 'Julie Venturoli', 'jventuroli4@marketwatch.com'),
-            ('22202', 'SFrieda Liddiatt', 'fliddiatt6@yahoo.co.jp');
+INSERT INTO se452.user (id, firstname, lastname, email, password) VALUES
+            ('1', 'Sheena Wyre', 'Sheena Wyre','arta', '123'),
+            ('2', 'Sheena Wyre', 'Sheena Wyre','arta', '123'),
+            ('3', 'Sheena Wyre', 'Sheena Wyre','arta', '123'),
+            ('4', 'Sheena Wyre', 'Sheena Wyre','arta', '123'),
+            ('5', 'Sheena Wyre', 'Sheena Wyre','arta', '123');
