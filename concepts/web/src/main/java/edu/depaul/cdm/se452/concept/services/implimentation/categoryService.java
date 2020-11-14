@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(name = "datasource", havingValue = "db")
-public class CategoryService implements ICategoryService {
+public class categoryService implements ICategoryService {
 
     @Autowired
     private CategoryRepository repository;

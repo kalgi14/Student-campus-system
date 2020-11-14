@@ -13,4 +13,8 @@ public interface IGradeService {
 
     public GradeEntity findById(GradeKey id);
 
+    public List <GradeEntity> findByStudent(String studentID);
+
+    public List <GradeEntity> findByClass(String classID);
+
 }

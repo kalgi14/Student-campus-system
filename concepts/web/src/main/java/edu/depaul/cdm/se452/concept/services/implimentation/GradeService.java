@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @ConditionalOnProperty(name = "datasource", havingValue = "db")
 public class GradeService implements IGradeService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private GradeRepository repository;
@@ -28,10 +34,30 @@ public class GradeService implements IGradeService {
         return grade;
     }
 
-    //TODO: This won't work as is need help to configure.
+    //TODO: Will not work as is
     @Override
     public GradeEntity findById(GradeKey id) {
-        return repository.findById(UUID.fromString(id.toString())).get();
+        return null;
+    }
+
+    @Override
+    public List<GradeEntity> findByStudent(String studentID) {
+        TypedQuery query = em.createQuery(
+                "SELECT a " +
+                        "FROM grades a " +
+                        "WHERE a.Student_ID = ?1", int.class);
+        query.setParameter(1, Integer.parseInt(studentID));
+        return query.getResultList();
+    }
+
+    @Override
+    public List<GradeEntity> findByClass(String classID) {
+        TypedQuery query = em.createQuery(
+                "SELECT a " +
+                        "FROM grades a " +
+                        "WHERE a.CLASS_ID = ?1", int.class);
+        query.setParameter(1, Integer.parseInt(classID));
+        return query.getResultList();
     }
 
 }

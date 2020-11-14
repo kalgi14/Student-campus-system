@@ -29,4 +29,15 @@ public class GradeKey implements Serializable {
     public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
+
+    @Override
+    public boolean equals(Object o){
+
+        if(this == o) return true;
+        else if(!(o instanceof GradeKey)) return false;
+
+        GradeKey g = (GradeKey) o;
+        if(this.classId == g.classId && this.studentId == g.studentId) return true;
+        else return false;
+    }
 }
