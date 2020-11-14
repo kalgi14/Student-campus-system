@@ -1,6 +1,6 @@
 package edu.depaul.cdm.se452.concept.database.mysql.domain;
 
-import edu.depaul.cdm.se452.concept.model.GradeKey;
+import edu.depaul.cdm.se452.concept.services.implimentation.GradeKey;
 import lombok.Data;
 import javax.persistence.*;
 

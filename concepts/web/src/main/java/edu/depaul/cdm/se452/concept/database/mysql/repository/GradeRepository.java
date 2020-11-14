@@ -1,8 +1,7 @@
 package edu.depaul.cdm.se452.concept.database.mysql.repository;
 
-import edu.depaul.cdm.se452.concept.database.mysql.domain.CategoryEntity;
 import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeEntity;
-import edu.depaul.cdm.se452.concept.model.GradeKey;
+import edu.depaul.cdm.se452.concept.services.implimentation.GradeKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
