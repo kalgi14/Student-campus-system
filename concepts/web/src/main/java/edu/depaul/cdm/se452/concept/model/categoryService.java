@@ -18,6 +18,7 @@ public class categoryService implements ICategoryService {
 
     @Override
     public List<CategoryEntity> findAll() {
+
         return repository.findAll();
     }
 
@@ -29,11 +30,13 @@ public class categoryService implements ICategoryService {
 
     @Override
     public CategoryEntity findById(String id) {
+
         return repository.findById(UUID.fromString(id)).get();
     }
 
     @Override
     public void deleteById(String id) {
+
         repository.deleteById(UUID.fromString(id));
     }
 }
