@@ -1,4 +1,4 @@
-package edu.depaul.cdm.se452.concept.model;
+package edu.depaul.cdm.se452.concept.services.implimentation;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

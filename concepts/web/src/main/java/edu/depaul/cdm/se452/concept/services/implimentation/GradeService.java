@@ -1,9 +1,8 @@
-package edu.depaul.cdm.se452.concept.model;
+package edu.depaul.cdm.se452.concept.services.implimentation;
 
 import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeEntity;
-import edu.depaul.cdm.se452.concept.database.mysql.domain.TuitionEntity;
 import edu.depaul.cdm.se452.concept.database.mysql.repository.GradeRepository;
-import edu.depaul.cdm.se452.concept.database.mysql.repository.TuitionRepository;
+import edu.depaul.cdm.se452.concept.services.interfaces.IGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;

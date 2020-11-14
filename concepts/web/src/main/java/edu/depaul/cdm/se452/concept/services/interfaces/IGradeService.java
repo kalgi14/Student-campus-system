@@ -1,8 +1,7 @@
-package edu.depaul.cdm.se452.concept.model;
+package edu.depaul.cdm.se452.concept.services.interfaces;
 
-import edu.depaul.cdm.se452.concept.database.mysql.domain.CategoryEntity;
 import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeEntity;
-import edu.depaul.cdm.se452.concept.database.mysql.domain.TuitionEntity;
+import edu.depaul.cdm.se452.concept.services.implimentation.GradeKey;
 
 import java.util.List;
 

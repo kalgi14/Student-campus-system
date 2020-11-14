@@ -1,4 +1,4 @@
-package edu.depaul.cdm.se452.concept.model;
+package edu.depaul.cdm.se452.concept.services.interfaces;
 
 import edu.depaul.cdm.se452.concept.database.mysql.domain.CategoryEntity;
 
