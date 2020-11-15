@@ -11,10 +11,10 @@ public class GradeEntity {
     @EmbeddedId
     private GradeKey id;
 
-    @Column
+    @Column (name = "COURSE_ID")
     private int courseId;
 
-    @Column
+    @Column (name = "GRADES_EARNED")
     private float grade_earned;
 
 }

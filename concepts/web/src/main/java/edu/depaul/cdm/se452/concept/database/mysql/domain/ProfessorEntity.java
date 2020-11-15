@@ -12,10 +12,10 @@ public class ProfessorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column (name = "FIRST_NAME")
     private String firstName;
 
-    @Column
+    @Column (name = "LAST_NAME")
     private String lastName;
 
 }

@@ -1,12 +1,14 @@
 package edu.depaul.cdm.se452.concept.database.mysql.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
 public class GradeKey implements Serializable {
-
+    @Column (name = "CLASS_ID")
     private int classId;
+    @Column (name = "STUDENT_ID")
     private int studentId;
 
     public GradeKey(int classId, int studentId){

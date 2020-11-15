@@ -11,14 +11,14 @@ public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int courseID;
-    @Column
+    @Column (name = "SHORT_NAME")
     String shortName;
-    @Column
+    @Column (name = "NAME")
     String name;
-    @Column
+    @Column (name = "DEPARTMENT")
     String Department;
-    @Column
+    @Column (name = "CREDITS")
     int credits;
-    @Column
+    @Column (name = "GRADUATE")
     boolean graduate;
 }

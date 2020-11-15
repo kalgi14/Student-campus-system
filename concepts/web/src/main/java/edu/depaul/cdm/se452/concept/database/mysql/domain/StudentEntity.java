@@ -12,16 +12,16 @@ public class StudentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int STUDENT_ID;
 
-    @Column
+    @Column (name = "FIRST_NAME")
     private String FIRST_NAME;
 
-    @Column
+    @Column (name = "LAST_NAME")
     private String LAST_NAME;
 
-    @Column
+    @Column (name = "U_PASS")
     private int U_PASS;
 
-    @Column
+    @Column (name = "CREDITS_TAKEN")
     private int CREDITS_TAKEN;
 
 }
