@@ -1,7 +1,7 @@
 package edu.depaul.cdm.se452.concept.services.interfaces;
 
 import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeEntity;
-import edu.depaul.cdm.se452.concept.services.implimentation.GradeKey;
+import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeKey;
 
 import java.util.List;
 

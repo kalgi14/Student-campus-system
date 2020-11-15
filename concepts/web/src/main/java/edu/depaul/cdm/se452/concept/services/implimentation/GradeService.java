@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se452.concept.services.implimentation;
 
 import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeEntity;
+import edu.depaul.cdm.se452.concept.database.mysql.domain.GradeKey;
 import edu.depaul.cdm.se452.concept.database.mysql.repository.GradeRepository;
 import edu.depaul.cdm.se452.concept.services.interfaces.IGradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @ConditionalOnProperty(name = "datasource", havingValue = "db")
@@ -34,10 +34,9 @@ public class GradeService implements IGradeService {
         return grade;
     }
 
-    //TODO: Will not work as is
     @Override
     public GradeEntity findById(GradeKey id) {
-        return null;
+        return repository.findById(id).get();
     }
 
     @Override

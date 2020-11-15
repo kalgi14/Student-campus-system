@@ -1,4 +1,4 @@
-package edu.depaul.cdm.se452.concept.services.implimentation;
+package edu.depaul.cdm.se452.concept.database.mysql.domain;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
