@@ -11,16 +11,16 @@ public class TuitionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column (name = "TUITION_ID")
     private int TUITION_ID;
 
-    @Column
+    @Column (name = "STUDENT_ID")
     private int STUDENT_ID;
 
-    @Column
+    @Column (name = "MONEY_DUE")
     private int MONEY_DUE;
 
-    @Column
+    @Column (name = "QUARTER")
     private String QUARTER;
 
 }

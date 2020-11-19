@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se452.concept;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +20,8 @@ public class Main {
       return (args) -> {
         System.out.println(env);
       };
-    }    
-    public static void main(String[] args) {
+    }
+    public static void main(MysqlxDatatypes.Scalar.String[] args) {
 
         SpringApplication.run(Main.class, args);
     }
