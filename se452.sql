@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2020 at 01:09 AM
+-- Generation Time: Nov 20, 2020 at 03:39 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -66,7 +66,7 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 (4, 'name4', 'description4'),
 (5, 'name5', 'description5'),
 (6, 'name6', 'description6'),
-(7, 'name7', 'description7');
+(7, 'name8', 'description8');
 
 -- --------------------------------------------------------
 
@@ -125,20 +125,24 @@ INSERT INTO `courses` (`COURSE_ID`, `SHORT_NAME`, `NAME`, `DEPARTMENT`, `CREDITS
 --
 
 CREATE TABLE `enrollment` (
+  `id` int(11) NOT NULL,
   `CLASS_ID` int(11) NOT NULL,
-  `STUDENT_ID` int(11) NOT NULL
+  `STUDENT_ID` int(11) NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `enrollment`
 --
 
-INSERT INTO `enrollment` (`CLASS_ID`, `STUDENT_ID`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5);
+INSERT INTO `enrollment` (`id`, `CLASS_ID`, `STUDENT_ID`, `active`) VALUES
+(1, 1, 1, 1),
+(2, 1, 4, 1),
+(3, 2, 3, 1),
+(4, 3, 2, 1),
+(5, 4, 5, 1),
+(6, 4, 1, 1),
+(7, 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -163,30 +167,6 @@ INSERT INTO `grades` (`COURSE_ID`, `CLASS_ID`, `GRADES_EARNED`, `STUDENT_ID`) VA
 (452, 1, 4, 3),
 (452, 1, 4, 4),
 (452, 1, 4, 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login`
---
-
-CREATE TABLE `login` (
-  `LOGIN_ID` int(11) DEFAULT NULL,
-  `PASSWORD` varchar(20) DEFAULT NULL,
-  `ACCESS_TYPE` varchar(20) DEFAULT NULL,
-  `STUDENT_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`LOGIN_ID`, `PASSWORD`, `ACCESS_TYPE`, `STUDENT_ID`) VALUES
-(123, 'ABD', 'STUDENT', 1),
-(345, 'EFG', 'STUDENT', 2),
-(678, 'HIJ', 'STUDENT', 3),
-(910, 'KLM', 'STUDENT', 4),
-(911, 'NOP', 'STUDENT', 5);
 
 -- --------------------------------------------------------
 
@@ -264,22 +244,23 @@ INSERT INTO `students` (`STUDENT_ID`, `FIRST_NAME`, `LAST_NAME`, `U_PASS`, `CRED
 --
 
 CREATE TABLE `tuition` (
+  `id` int(11) NOT NULL,
   `TUITION_ID` int(11) NOT NULL,
-  `STUDENT_ID` int(11) DEFAULT NULL,
-  `MONEY_DUE` int(11) DEFAULT NULL,
-  `QUARTER` varchar(10) DEFAULT NULL
+  `STUDENT_ID` int(11) NOT NULL,
+  `MONEY_DUE` int(11) NOT NULL,
+  `QUARTER` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tuition`
 --
 
-INSERT INTO `tuition` (`TUITION_ID`, `STUDENT_ID`, `MONEY_DUE`, `QUARTER`) VALUES
-(11, 1, 5000, 'FALL2020'),
-(22, 2, 5000, 'FALL2020'),
-(33, 3, 5000, 'FALL2020'),
-(44, 4, 5000, 'FALL2020'),
-(55, 5, 5000, 'FALL2020');
+INSERT INTO `tuition` (`id`, `TUITION_ID`, `STUDENT_ID`, `MONEY_DUE`, `QUARTER`) VALUES
+(1, 111, 1, 1, 'Fall'),
+(2, 222, 2, 2, 'Fall'),
+(3, 333, 3, 3, 'winter'),
+(4, 444, 4, 4, 'winter'),
+(5, 555, 5, 5, 'spring');
 
 -- --------------------------------------------------------
 
@@ -337,7 +318,8 @@ ALTER TABLE `courses`
 -- Indexes for table `enrollment`
 --
 ALTER TABLE `enrollment`
-  ADD PRIMARY KEY (`CLASS_ID`,`STUDENT_ID`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `CLASS_ID` (`CLASS_ID`,`STUDENT_ID`),
   ADD KEY `STUDENT_ID` (`STUDENT_ID`);
 
 --
@@ -345,12 +327,6 @@ ALTER TABLE `enrollment`
 --
 ALTER TABLE `grades`
   ADD PRIMARY KEY (`CLASS_ID`,`STUDENT_ID`),
-  ADD KEY `STUDENT_ID` (`STUDENT_ID`);
-
---
--- Indexes for table `login`
---
-ALTER TABLE `login`
   ADD KEY `STUDENT_ID` (`STUDENT_ID`);
 
 --
@@ -376,7 +352,8 @@ ALTER TABLE `students`
 -- Indexes for table `tuition`
 --
 ALTER TABLE `tuition`
-  ADD PRIMARY KEY (`TUITION_ID`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `TUITION_ID` (`TUITION_ID`,`STUDENT_ID`),
   ADD KEY `STUDENT_ID` (`STUDENT_ID`);
 
 --
@@ -394,6 +371,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `enrollment`
+--
+ALTER TABLE `enrollment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tuition`
+--
+ALTER TABLE `tuition`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -427,22 +416,11 @@ ALTER TABLE `grades`
   ADD CONSTRAINT `grades_ibfk_2` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`);
 
 --
--- Constraints for table `login`
---
-ALTER TABLE `login`
-  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`);
-
---
--- Constraints for table `payments`
---
-ALTER TABLE `payments`
-  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`TUITION_ID`) REFERENCES `tuition` (`TUITION_ID`);
-
---
 -- Constraints for table `tuition`
 --
 ALTER TABLE `tuition`
-  ADD CONSTRAINT `tuition_ibfk_1` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`);
+  ADD CONSTRAINT `tuition_ibfk_1` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`),
+  ADD CONSTRAINT `tuition_ibfk_2` FOREIGN KEY (`TUITION_ID`) REFERENCES `payments` (`PAYMENT_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
