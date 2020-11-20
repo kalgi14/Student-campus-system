@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2020 at 03:39 AM
+-- Generation Time: Nov 20, 2020 at 10:09 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -46,31 +46,6 @@ INSERT INTO `admins` (`ADMIN_ID`, `FIRST_NAME`, `LAST_NAME`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
---
-
-CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `name`, `description`) VALUES
-(1, 'name1', 'description1'),
-(2, 'name2', 'description2'),
-(3, 'name3', 'description3'),
-(4, 'name4', 'description4'),
-(5, 'name5', 'description5'),
-(6, 'name6', 'description6'),
-(7, 'name8', 'description8');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `classes`
 --
 
@@ -102,21 +77,23 @@ CREATE TABLE `courses` (
   `NAME` varchar(50) DEFAULT NULL,
   `DEPARTMENT` varchar(10) DEFAULT NULL,
   `CREDITS` int(11) DEFAULT NULL,
-  `GRADUATE` bit(1) DEFAULT NULL
+  `GRADUATE` bit(1) DEFAULT NULL,
+  `courseID` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`COURSE_ID`, `SHORT_NAME`, `NAME`, `DEPARTMENT`, `CREDITS`, `GRADUATE`) VALUES
-(335, 'CSC335', 'Distributed Systems', 'CDM', 4, b'0'),
-(352, 'CSC352', 'Object Oriented Enterprise Computing', 'CDM', 4, b'0'),
-(371, 'CSC371', 'Mobile Appplication Development for iOS', 'CDM', 4, b'0'),
-(435, 'CSC435', 'Distributed Systems', 'CDM', 4, b'1'),
-(452, 'CSC452', 'Object Oriented Enterprise Computing', 'CDM', 4, b'1'),
-(471, 'CSC471', 'Mobile Appplication Development for iOS', 'CDM', 4, b'1'),
-(555, 'FIN555', 'Financial Management', 'BUSS', 4, b'1');
+INSERT INTO `courses` (`COURSE_ID`, `SHORT_NAME`, `NAME`, `DEPARTMENT`, `CREDITS`, `GRADUATE`, `courseID`, `id`) VALUES
+(335, 'CSC335', 'Distributed Systems', 'CDM', 4, b'0', 0, 0),
+(352, 'CSC352', 'Object Oriented Enterprise Computing', 'CDM', 4, b'0', 0, 0),
+(371, 'CSC371', 'Mobile Appplication Development for iOS', 'CDM', 4, b'0', 0, 0),
+(435, 'CSC435', 'Distributed Systems', 'CDM', 4, b'1', 0, 0),
+(452, 'CSC452', 'Object Oriented Enterprise Computing', 'CDM', 4, b'1', 0, 0),
+(471, 'CSC471', 'Mobile Appplication Development for iOS', 'CDM', 4, b'1', 0, 0),
+(555, 'FIN555', 'Financial Management', 'BUSS', 4, b'1', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -142,7 +119,8 @@ INSERT INTO `enrollment` (`id`, `CLASS_ID`, `STUDENT_ID`, `active`) VALUES
 (4, 3, 2, 1),
 (5, 4, 5, 1),
 (6, 4, 1, 1),
-(7, 4, 2, 1);
+(7, 4, 2, 1),
+(8, 4, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -154,19 +132,20 @@ CREATE TABLE `grades` (
   `COURSE_ID` int(11) DEFAULT NULL,
   `CLASS_ID` int(11) NOT NULL,
   `GRADES_EARNED` float DEFAULT NULL,
-  `STUDENT_ID` int(11) NOT NULL
+  `STUDENT_ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `grades`
 --
 
-INSERT INTO `grades` (`COURSE_ID`, `CLASS_ID`, `GRADES_EARNED`, `STUDENT_ID`) VALUES
-(452, 1, 4, 1),
-(452, 1, 4, 2),
-(452, 1, 4, 3),
-(452, 1, 4, 4),
-(452, 1, 4, 5);
+INSERT INTO `grades` (`COURSE_ID`, `CLASS_ID`, `GRADES_EARNED`, `STUDENT_ID`, `id`) VALUES
+(452, 1, 4, 1, 0),
+(452, 1, 4, 2, 0),
+(452, 1, 4, 3, 0),
+(452, 1, 4, 4, 0),
+(452, 1, 4, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -269,20 +248,24 @@ INSERT INTO `tuition` (`id`, `TUITION_ID`, `STUDENT_ID`, `MONEY_DUE`, `QUARTER`)
 --
 
 CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `professor_id` int(11) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(64) NOT NULL,
   `role` varchar(45) NOT NULL,
-  `enabled` tinyint(4) DEFAULT NULL
+  `enabled` tinyint(4) DEFAULT NULL,
+  `STUDENT_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `enabled`) VALUES
-(1, 'namhm', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu', 'ROLE_USER', 1),
-(2, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1);
+INSERT INTO `users` (`id`, `user_id`, `admin_id`, `professor_id`, `username`, `password`, `role`, `enabled`, `STUDENT_ID`) VALUES
+(1, 0, 0, 0, 'namhm', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu', 'ROLE_USER', 1, NULL),
+(2, 0, 0, 0, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -293,12 +276,6 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `enabled`) VALUE
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`ADMIN_ID`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `classes`
@@ -319,8 +296,9 @@ ALTER TABLE `courses`
 --
 ALTER TABLE `enrollment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `CLASS_ID` (`CLASS_ID`,`STUDENT_ID`),
-  ADD KEY `STUDENT_ID` (`STUDENT_ID`);
+  ADD UNIQUE KEY `CLASS_ID_2` (`CLASS_ID`,`STUDENT_ID`),
+  ADD KEY `STUDENT_ID` (`STUDENT_ID`),
+  ADD KEY `CLASS_ID` (`CLASS_ID`) USING BTREE;
 
 --
 -- Indexes for table `grades`
@@ -360,23 +338,22 @@ ALTER TABLE `tuition`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `professor_id` (`professor_id`),
+  ADD KEY `FK6mjyxb92dnfdr6lmmbnuatl92` (`STUDENT_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `enrollment`
 --
 ALTER TABLE `enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tuition`
@@ -388,7 +365,7 @@ ALTER TABLE `tuition`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -421,6 +398,12 @@ ALTER TABLE `grades`
 ALTER TABLE `tuition`
   ADD CONSTRAINT `tuition_ibfk_1` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`),
   ADD CONSTRAINT `tuition_ibfk_2` FOREIGN KEY (`TUITION_ID`) REFERENCES `payments` (`PAYMENT_ID`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `FK6mjyxb92dnfdr6lmmbnuatl92` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
