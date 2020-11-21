@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @ConditionalOnProperty(name = "datasource", havingValue = "db")
 public class TuitionService implements ITuitionService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private TuitionRepository repository;
@@ -31,6 +37,16 @@ public class TuitionService implements ITuitionService {
     @Override
     public TuitionEntity findById(String id) {
         return repository.findById(UUID.fromString(id)).get();
+    }
+
+    @Override
+    public List<TuitionEntity> findByStudent(String studentID) {
+        TypedQuery query = em.createQuery(
+                "SELECT a " +
+                        "FROM tuition a " +
+                        "WHERE a.Student_ID = ?1", String.class);
+        query.setParameter(1, studentID);
+        return query.getResultList();
     }
 
     @Override

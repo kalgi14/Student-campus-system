@@ -11,5 +11,7 @@ public interface ITuitionService {
 
     public TuitionEntity findById(String id);
 
+    public List<TuitionEntity> findByStudent(String id);
+
     public void deleteById(String id);
 }
