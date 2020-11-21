@@ -1,9 +1,7 @@
 package edu.depaul.cdm.se452.concept.view;
 
 import edu.depaul.cdm.se452.concept.model.Enrollment;
-
 import javax.validation.Valid;
-
 import edu.depaul.cdm.se452.concept.controller.services.implimentation.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
