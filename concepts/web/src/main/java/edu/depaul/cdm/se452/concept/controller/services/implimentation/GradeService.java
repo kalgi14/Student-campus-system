@@ -61,34 +61,4 @@ public class GradeService implements IGradeService {
         query.setParameter(1, Integer.parseInt(classID));
         return query.getResultList();
     }
-
-    @ConditionalOnProperty(name = "datasource", havingValue = "db")
-    @Service
-    public static class EnrollmentService implements IProfessorService.IEnrollmentService {
-
-        @Autowired
-        private EnrollmentRepository repository;
-
-        @Override
-        public List<Enrollment> findAll() {
-            return repository.findAll();
-        }
-
-        @Override
-        public Enrollment update(Enrollment enrol) {
-            repository.save(enrol);
-            return enrol;
-        }
-
-        @Override
-        public Enrollment findById(int id) {
-            return repository.findById(id);
-        }
-
-        @Override
-        public void deleteById(int id) {
-            repository.deleteById(id);
-        }
-
-    }
 }

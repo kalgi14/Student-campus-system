@@ -2,6 +2,7 @@ package edu.depaul.cdm.se452.concept.config;
 
 import javax.sql.DataSource;
 
+import edu.depaul.cdm.se452.concept.controller.services.implimentation.EnrollmentService;
 import edu.depaul.cdm.se452.concept.controller.services.implimentation.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -24,8 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     private DataSource dataSource;
 
     @Bean
-    public GradeService.EnrollmentService someBean() {
-        return new GradeService.EnrollmentService();
+    public EnrollmentService someBean() {
+        return new EnrollmentService();
     }
 
 //    public edu.depaul.cdm.se452.concept.controller.services.interfaces.IProfessorService.IEnrollmentService enrollmentInterface;

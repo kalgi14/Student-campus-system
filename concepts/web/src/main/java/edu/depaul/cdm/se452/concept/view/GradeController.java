@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se452.concept.view;
 
+import edu.depaul.cdm.se452.concept.controller.services.implimentation.EnrollmentService;
 import edu.depaul.cdm.se452.concept.model.Enrollment;
 import javax.validation.Valid;
 import edu.depaul.cdm.se452.concept.controller.services.implimentation.GradeService;
@@ -18,8 +19,8 @@ public class GradeController {
 
     @Qualifier("someBean")
     @Autowired
-    GradeService.EnrollmentService IenrlService;
+    EnrollmentService IenrlService;
 
-    
+
 
 }
