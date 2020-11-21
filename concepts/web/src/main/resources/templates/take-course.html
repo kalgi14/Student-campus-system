@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -68,29 +68,35 @@
             <div class="app-main__inner">
                 <div class="row">
                     <div class="col-lg-12">
-                            <form class="">
-                                        <div class="main-card mb-3 card">
-                                            <div class="card-body"><h5 class="card-title">Select Course</h5>
+                                            <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="position-relative form-group">
-                                                            <label for="exampleCustomSelect" class="">Choose one course at time</label>
-                                                            <select type="select" id="exampleCustomSelect" name="customSelect" class="custom-select">
-                                                                <option value="">Select</option>
-                                                                <option>Value 1</option>
-                                                                <option>Value 2</option>
-                                                                <option>Value 3</option>
-                                                                <option>Value 4</option>
-                                                                <option>Value 5</option>
-                                                            </select>
-                                                        </div>
-                                                        <button class="mb-2 mr-2 btn btn-primary">Submit
-                                                        </button>
+                                                    <div class="col-md-4">
+
+                                                        <form th:action="@{/CategoryEntity/add}" th:object="${enrl}" method="post" >
+                                                            <div class="position-relative form-group">
+                                                                <label class="">Select tour course: </label>
+                                                                <table class="table table-striped table-responsive-md">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th style="text-align: center">Class ID</th>
+                                                                        <th style="text-align: center">Student ID</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td><input class="form-control" type="text" th:field="*{CLASS_ID}" /></td>
+                                                                        <td><input class="form-control" type="text" th:field="*{STUDENT_ID}" /></td>
+                                                                        <td><button class="mb-2 mr-2 btn btn-primary" type="submit">Submit</button></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                            </form>
                     </div>
                 </div>
             </div>
@@ -98,7 +104,6 @@
 <!--    -->
     </div>
 </div>
-
 <script type="text/javascript" src="/assets/scripts/main.js"></script>
 </body>
 </html>

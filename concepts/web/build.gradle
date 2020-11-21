@@ -5,8 +5,8 @@ plugins {
 }
 
 group = 'edu.depaul.cdm.se452.concept'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '0.0.2-SNAPSHOT'
+sourceCompatibility = '12'
 
 configurations {
 	compileOnly {
@@ -27,7 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.security:spring-security-test'	
+	implementation 'org.springframework.security:spring-security-test'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

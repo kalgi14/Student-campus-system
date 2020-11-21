@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -18,7 +20,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager", basePackages = {"edu.depaul.cdm.se452.concept.controller.database.mysql.repository"})
+@EnableJpaRepositories(entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager", basePackages = {"edu.depaul.cdm.se452.concept.database.mysql.repository"})
 
 public class MySQLConfig {
 
@@ -38,7 +40,7 @@ public class MySQLConfig {
     @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(@Qualifier("mysqlDataSource") DataSource hubDataSource, EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(hubDataSource).packages("edu.depaul.cdm.se452.concept.controller.database.mysql.domain")
+        return builder.dataSource(hubDataSource).packages("edu.depaul.cdm.se452.concept.database.mysql.domain")
                 .persistenceUnit("mysql").build();
     }
 
@@ -46,5 +48,17 @@ public class MySQLConfig {
     @Bean
     public PlatformTransactionManager mysqlTransactionManager(@Qualifier("mysqlEntityManagerFactory") EntityManagerFactory factory) {
         return new JpaTransactionManager(factory);
+    }
+    @Bean
+    public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setDatabase(Database.MYSQL);
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("com.roytuts.spring.data.jpa.left.right.inner.cross.join.entity");
+        factory.setDataSource(dataSource);
+        factory.afterPropertiesSet();
+        return factory.getObject();
     }
 }

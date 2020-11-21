@@ -22,46 +22,38 @@
             <div class="scrollbar-sidebar">
                 <div class="app-sidebar__inner">
                     <ul class="vertical-nav-menu">
-                        <li class="app-sidebar__heading">Dashboards</li>
                         <li class="mm-active">
-                            <a href="dashboard">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../">
                                 Home
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="tuition">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../tuition">
                                 Tuition
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="grade">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../grade">
                                 Grades
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="course">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../course">
                                 Course
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="course_catalog">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../course_catalog">
                                 Class Catalog
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="take_course">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
-                                Take Course
+                            <a href="../enrollment">
+                                Enrollment
                             </a>
                         </li>
                         <li class="mm-active">
-                            <a href="logout">
-                                <i class="metismenu-icon pe-7s-rocket"></i>
+                            <a href="../logout">
                                 log out
                             </a>
                         </li>
@@ -79,7 +71,7 @@
                                 <div th:switch="${enrollment}">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h2 th:case="null">No students yet!</h2>
+                                            <h2 th:case="null">No Enrollment yet!</h2>
                                             <div th:case="*">
                                                 <h2 class="my-5">All enrollments</h2>
                                                 <h2 th:text="${message}"></h2>
@@ -115,9 +107,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="container">
-                                    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-                                </div>
+<!--                                <div class="container">-->
+<!--                                    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>

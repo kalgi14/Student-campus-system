@@ -2,22 +2,26 @@ package edu.depaul.cdm.se452.concept.config;
 
 import javax.sql.DataSource;
 
-import edu.depaul.cdm.se452.concept.controller.services.implimentation.EnrollmentService;
-import edu.depaul.cdm.se452.concept.controller.services.implimentation.GradeService;
+import edu.depaul.cdm.se452.concept.model.*;
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
+
 @Configuration
 @ComponentScan({"edu.depaul.cdm.se452.concept.model"})
-@EntityScan(basePackages = "edu.depaul.cdm.se452.concept.controller.database.mysql.domain")
+@EntityScan(basePackages = "edu.depaul.cdm.se452.concept.database.mysql.domain")
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
@@ -25,11 +29,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     private DataSource dataSource;
 
     @Bean
-    public EnrollmentService someBean() {
-        return new EnrollmentService();
+    public userCredentials usr() {
+        return new userCredentials();
     }
 
-//    public edu.depaul.cdm.se452.concept.controller.services.interfaces.IProfessorService.IEnrollmentService enrollmentInterface;
+    @Bean
+    public enrollmentService someBean() {
+        return new enrollmentService();
+    }
+
+    @Bean
+    public TuitionService someBean2() {
+        return new TuitionService();
+    }
+
+//    public edu.depaul.cdm.se452.concept.model.IEnrollmentService enrollmentInterface;
 //    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //    String password = "adminPassword";
 //    String encodedPassword = passwordEncoder.encode(password);
