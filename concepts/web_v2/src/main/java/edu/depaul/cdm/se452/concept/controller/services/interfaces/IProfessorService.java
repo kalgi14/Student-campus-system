@@ -15,14 +15,4 @@ public interface IProfessorService {
 
     public void deleteById(String id);
 
-    @Component
-    interface IEnrollmentService {
-        public List<Enrollment> findAll();
-
-        public Enrollment update(Enrollment ce);
-
-        public Enrollment findById(int id);
-
-        public void deleteById(int id);
-    }
 }
