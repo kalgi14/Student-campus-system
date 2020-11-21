@@ -47,8 +47,8 @@ public class GradeService implements IGradeService {
         TypedQuery query = em.createQuery(
                 "SELECT a " +
                         "FROM grades a " +
-                        "WHERE a.Student_ID = ?1", int.class);
-        query.setParameter(1, Integer.parseInt(studentID));
+                        "WHERE a.Student_ID = ?1", String.class);
+        query.setParameter(1, studentID);
         return query.getResultList();
     }
 
