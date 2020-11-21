@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2020 at 10:09 PM
+-- Generation Time: Nov 22, 2020 at 12:28 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -77,23 +77,21 @@ CREATE TABLE `courses` (
   `NAME` varchar(50) DEFAULT NULL,
   `DEPARTMENT` varchar(10) DEFAULT NULL,
   `CREDITS` int(11) DEFAULT NULL,
-  `GRADUATE` bit(1) DEFAULT NULL,
-  `courseID` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `GRADUATE` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`COURSE_ID`, `SHORT_NAME`, `NAME`, `DEPARTMENT`, `CREDITS`, `GRADUATE`, `courseID`, `id`) VALUES
-(335, 'CSC335', 'Distributed Systems', 'CDM', 4, b'0', 0, 0),
-(352, 'CSC352', 'Object Oriented Enterprise Computing', 'CDM', 4, b'0', 0, 0),
-(371, 'CSC371', 'Mobile Appplication Development for iOS', 'CDM', 4, b'0', 0, 0),
-(435, 'CSC435', 'Distributed Systems', 'CDM', 4, b'1', 0, 0),
-(452, 'CSC452', 'Object Oriented Enterprise Computing', 'CDM', 4, b'1', 0, 0),
-(471, 'CSC471', 'Mobile Appplication Development for iOS', 'CDM', 4, b'1', 0, 0),
-(555, 'FIN555', 'Financial Management', 'BUSS', 4, b'1', 0, 0);
+INSERT INTO `courses` (`COURSE_ID`, `SHORT_NAME`, `NAME`, `DEPARTMENT`, `CREDITS`, `GRADUATE`) VALUES
+(335, 'CSC335', 'Distributed Systems', 'CDM', 4, b'0'),
+(352, 'CSC352', 'Object Oriented Enterprise Computing', 'CDM', 4, b'0'),
+(371, 'CSC371', 'Mobile Appplication Development for iOS', 'CDM', 4, b'0'),
+(435, 'CSC435', 'Distributed Systems', 'CDM', 4, b'1'),
+(452, 'CSC452', 'Object Oriented Enterprise Computing', 'CDM', 4, b'1'),
+(471, 'CSC471', 'Mobile Appplication Development for iOS', 'CDM', 4, b'1'),
+(555, 'FIN555', 'Financial Management', 'BUSS', 4, b'1');
 
 -- --------------------------------------------------------
 
@@ -119,8 +117,7 @@ INSERT INTO `enrollment` (`id`, `CLASS_ID`, `STUDENT_ID`, `active`) VALUES
 (4, 3, 2, 1),
 (5, 4, 5, 1),
 (6, 4, 1, 1),
-(7, 4, 2, 1),
-(8, 4, 3, 1);
+(7, 4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -249,23 +246,23 @@ INSERT INTO `tuition` (`id`, `TUITION_ID`, `STUDENT_ID`, `MONEY_DUE`, `QUARTER`)
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL,
-  `professor_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `professor_id` int(11) DEFAULT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(64) NOT NULL,
   `role` varchar(45) NOT NULL,
-  `enabled` tinyint(4) DEFAULT NULL,
-  `STUDENT_ID` int(11) DEFAULT NULL
+  `enabled` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `admin_id`, `professor_id`, `username`, `password`, `role`, `enabled`, `STUDENT_ID`) VALUES
-(1, 0, 0, 0, 'namhm', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu', 'ROLE_USER', 1, NULL),
-(2, 0, 0, 0, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1, NULL);
+INSERT INTO `users` (`id`, `user_id`, `admin_id`, `professor_id`, `username`, `password`, `role`, `enabled`) VALUES
+(1, 1, NULL, NULL, 'namhm', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu', 'ROLE_USER', 1),
+(2, NULL, 1, NULL, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1),
+(3, 3, NULL, NULL, 'arta', '123', 'user', 1);
 
 --
 -- Indexes for dumped tables
@@ -342,8 +339,7 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `admin_id` (`admin_id`),
-  ADD KEY `professor_id` (`professor_id`),
-  ADD KEY `FK6mjyxb92dnfdr6lmmbnuatl92` (`STUDENT_ID`);
+  ADD KEY `professor_id` (`professor_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -353,7 +349,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `enrollment`
 --
 ALTER TABLE `enrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tuition`
@@ -365,7 +361,7 @@ ALTER TABLE `tuition`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -403,7 +399,9 @@ ALTER TABLE `tuition`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `FK6mjyxb92dnfdr6lmmbnuatl92` FOREIGN KEY (`STUDENT_ID`) REFERENCES `students` (`STUDENT_ID`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`ADMIN_ID`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`professor_id`) REFERENCES `professors` (`PROFESSOR_ID`),
+  ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `students` (`STUDENT_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
