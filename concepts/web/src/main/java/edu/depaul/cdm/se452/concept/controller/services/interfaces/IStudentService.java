@@ -10,5 +10,7 @@ public interface IStudentService {
 
     public StudentEntity findById(String id);
 
+    public StudentEntity findById(int id);
+
     public void deleteById(String id);
 }

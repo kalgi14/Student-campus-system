@@ -1,7 +1,7 @@
 package edu.depaul.cdm.se452.concept.controller.services.implimentation;
 
 import edu.depaul.cdm.se452.concept.controller.database.mysql.repository.EnrollmentRepository;
-import edu.depaul.cdm.se452.concept.controller.services.interfaces.IProfessorService;
+import edu.depaul.cdm.se452.concept.controller.services.interfaces.IEnrollmentService;
 import edu.depaul.cdm.se452.concept.model.Enrollment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @ConditionalOnProperty(name = "datasource", havingValue = "db")
 @Service
-public class EnrollmentService implements IProfessorService.IEnrollmentService {
+public class EnrollmentService implements IEnrollmentService {
 
     @Autowired
     private EnrollmentRepository repository;

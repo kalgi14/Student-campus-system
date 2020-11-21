@@ -34,6 +34,11 @@ public class StudentService implements IStudentService {
     }
 
     @Override
+    public StudentEntity findById(int id) {
+        return findById(Integer.toString(id));
+    }
+
+    @Override
     public void deleteById(String id) {
         repo.deleteById(UUID.fromString(id));
     }

@@ -1,6 +1,5 @@
 package edu.depaul.cdm.se452.concept.view;
 
-import edu.depaul.cdm.se452.concept.controller.services.implimentation.EnrollmentService;
 import edu.depaul.cdm.se452.concept.controller.services.implimentation.TuitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +19,8 @@ public class TuitionController {
 
     //Show all of the student's grades
     @GetMapping("/{id}")
-    public ModelAndView showDue(@PathVariable("id") String studentId) {
-        ModelAndView mv = new ModelAndView("grade");
+    public ModelAndView showAll(@PathVariable("id") String studentId) {
+        ModelAndView mv = new ModelAndView("tuition");
         mv.addObject("tuition", tuitionService.findByStudent(studentId));
         return mv;
     }
