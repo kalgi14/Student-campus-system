@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager", basePackages = {"edu.depaul.cdm.se452.concept.database.mysql.repository"})
+@EnableJpaRepositories(entityManagerFactoryRef = "mysqlEntityManagerFactory", transactionManagerRef = "mysqlTransactionManager", basePackages = {"edu.depaul.cdm.se452.concept.controller.database.mysql.repository"})
 
 public class MySQLConfig {
 
@@ -38,7 +38,7 @@ public class MySQLConfig {
     @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(@Qualifier("mysqlDataSource") DataSource hubDataSource, EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(hubDataSource).packages("edu.depaul.cdm.se452.concept.database.mysql.domain")
+        return builder.dataSource(hubDataSource).packages("edu.depaul.cdm.se452.concept.controller.database.mysql.domain")
                 .persistenceUnit("mysql").build();
     }
 
