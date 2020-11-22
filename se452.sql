@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2020 at 12:28 AM
+-- Generation Time: Nov 22, 2020 at 03:00 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.40
 
@@ -126,23 +126,22 @@ INSERT INTO `enrollment` (`id`, `CLASS_ID`, `STUDENT_ID`, `active`) VALUES
 --
 
 CREATE TABLE `grades` (
-  `COURSE_ID` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `CLASS_ID` int(11) NOT NULL,
   `GRADES_EARNED` float DEFAULT NULL,
-  `STUDENT_ID` int(11) NOT NULL,
-  `id` int(11) NOT NULL
+  `STUDENT_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `grades`
 --
 
-INSERT INTO `grades` (`COURSE_ID`, `CLASS_ID`, `GRADES_EARNED`, `STUDENT_ID`, `id`) VALUES
-(452, 1, 4, 1, 0),
-(452, 1, 4, 2, 0),
-(452, 1, 4, 3, 0),
-(452, 1, 4, 4, 0),
-(452, 1, 4, 5, 0);
+INSERT INTO `grades` (`id`, `CLASS_ID`, `GRADES_EARNED`, `STUDENT_ID`) VALUES
+(1, 1, 4, 3),
+(2, 1, 4, 2),
+(3, 1, 4, 5),
+(4, 3, 1, 1),
+(5, 3, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -166,6 +165,18 @@ INSERT INTO `payments` (`PAYMENT_ID`, `TUITION_ID`, `AMOUNT_PAID`) VALUES
 (333, 33, 30),
 (444, 44, 65),
 (555, 55, 500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professor`
+--
+
+CREATE TABLE `professor` (
+  `PROFESSOR_ID` int(11) NOT NULL,
+  `FIRST_NAME` varchar(255) DEFAULT NULL,
+  `LAST_NAME` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -261,8 +272,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_id`, `admin_id`, `professor_id`, `username`, `password`, `role`, `enabled`) VALUES
 (1, 1, NULL, NULL, 'namhm', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu', 'ROLE_USER', 1),
-(2, NULL, 1, NULL, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1),
-(3, 3, NULL, NULL, 'arta', '123', 'user', 1);
+(2, NULL, 1, NULL, 'admin', '$2a$10$fPoB2cqnFUCBKotoKhBmm.0f2vu6n3VT1ALK7YSIyd4IR6nbj3JwC', 'ROLE_ADMIN', 1);
 
 --
 -- Indexes for dumped tables
@@ -301,7 +311,9 @@ ALTER TABLE `enrollment`
 -- Indexes for table `grades`
 --
 ALTER TABLE `grades`
-  ADD PRIMARY KEY (`CLASS_ID`,`STUDENT_ID`),
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `CLASS_ID_2` (`CLASS_ID`,`STUDENT_ID`),
+  ADD KEY `CLASS_ID` (`CLASS_ID`),
   ADD KEY `STUDENT_ID` (`STUDENT_ID`);
 
 --
@@ -310,6 +322,12 @@ ALTER TABLE `grades`
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`PAYMENT_ID`),
   ADD KEY `TUITION_ID` (`TUITION_ID`);
+
+--
+-- Indexes for table `professor`
+--
+ALTER TABLE `professor`
+  ADD PRIMARY KEY (`PROFESSOR_ID`);
 
 --
 -- Indexes for table `professors`
@@ -350,6 +368,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `enrollment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `grades`
+--
+ALTER TABLE `grades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `professor`
+--
+ALTER TABLE `professor`
+  MODIFY `PROFESSOR_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tuition`
